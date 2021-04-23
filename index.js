@@ -13,4 +13,4 @@ app.listen(3000, ()=>{
     console.log('servidor funcionando')
 })
 
-module.exports= app
+// module.exports= app

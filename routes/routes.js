@@ -6,10 +6,12 @@ const routes = Router()
 routes
     .get('/',(req,res)=>{
         console.log('Hello Mundo!')
-        res.send('olá povo')       
+        res.send('Equipe rocket decolando de novo!')       
     })
     .get('/pokemons', PokemonController.getAll)
     .post('/pokemon', PokemonController.insert)
+    .put('/pokemons/:id', PokemonController.update)
+    .delete('/pokemons/:id', PokemonController.delete)
 
 
 module.exports = routes
