@@ -12,6 +12,8 @@ routes
     .post('/pokemon', PokemonController.insert)
     .put('/pokemons/:id', PokemonController.update)
     .delete('/pokemons/:id', PokemonController.delete)
+    .get('/pokemons/:id', PokemonController.getOne)
+    .get('/pokemon/nome', PokemonController.getAllByName)
 
 
 module.exports = routes

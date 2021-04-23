@@ -1,7 +1,7 @@
 const {
-    Pokemons
+    Pokemons, Sequelize
 } = require('../models/')
-
+const Op = Sequelize.Op
 class PokemonController {
     async getAll(req, res) {
 
@@ -14,10 +14,14 @@ class PokemonController {
             })
         }
     }
-    async getOne(req, res){
-
+    async getOne(req, res) {
+        const { id } = req.params
         try {
-            const umPokemons = await Pokemons.findOne()
+            const umPokemons = await Pokemons.findOne( { 
+                where:{
+                    id: Number(id)
+                }
+            } )
             return res.status(200).json(umPokemons)
         } catch (erro) {
             return res.status(400).json({
@@ -36,30 +40,51 @@ class PokemonController {
             })
         }
     }
-    async delete(req,res){
-        try{
+    async delete(req, res) {
+        try {
             const alvo = await Pokemons.findByPk(req.params.id)
-            if(alvo){
+            if (alvo) {
                 await alvo.destroy()
                 return res.status(204).json(alvo)
-            }else{
-                return res.status(400).json({ mensagem: "Pessoa não encontrada"})
+            } else {
+                return res.status(400).json({
+                    mensagem: "Pessoa não encontrada"
+                })
             }
-        }catch(erro){
+        } catch (erro) {
             return res.status(400).json({
                 error: erro.message
             })
         }
     }
-    async update(req,res){
-        try{
+    async update(req, res) {
+        try {
             const alvo = await Pokemons.findByPk(req.params.id)
-            if(alvo){
+            if (alvo) {
                 await alvo.update(req.body)
                 return res.status(204).json(alvo)
-            }else{
-                return res.status(400).json({ mensagem: "Pessoa não encontrada"})
+            } else {
+                return res.status(400).json({
+                    mensagem: "Pessoa não encontrada"
+                })
             }
+        } catch (erro) {
+            return res.status(400).json({
+                error: erro.message
+            })
+        }
+    }
+    async getAllByName(req, res) {
+        let nome = '%'+req.query.nome
+        try {
+            const pokemon = await Pokemons.findAll({
+                where:{
+                    nome: {
+                        [Op.like]: nome
+                    }
+                }
+            })
+            return res.status(200).json(pokemon)
         }catch(erro){
             return res.status(400).json({
                 error: erro.message
