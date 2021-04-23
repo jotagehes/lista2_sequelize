@@ -14,6 +14,12 @@ routes
     .delete('/pokemons/:id', PokemonController.delete)
     .get('/pokemons/:id', PokemonController.getOne)
     .get('/pokemon/nome', PokemonController.getAllByName)
+    .get('/treinadores', TreinadorController.getAll)
+    .post('/treinador', TreinadorController.insert)
+    .put('/treinadores/:id', TreinadorController.update)
+    .delete('/treinadores/:id', TreinadorController.delete)
+    .get('/treinadores/:id', TreinadorController.getOne)
+    .get('/treinador/nome', TreinadorController.getAllByName)
 
 
 module.exports = routes

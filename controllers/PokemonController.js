@@ -48,7 +48,7 @@ class PokemonController {
                 return res.status(204).json(alvo)
             } else {
                 return res.status(400).json({
-                    mensagem: "Pessoa não encontrada"
+                    mensagem: "Pokemon não encontrado"
                 })
             }
         } catch (erro) {
@@ -65,7 +65,7 @@ class PokemonController {
                 return res.status(204).json(alvo)
             } else {
                 return res.status(400).json({
-                    mensagem: "Pessoa não encontrada"
+                    mensagem: "Pokemon não encontrado"
                 })
             }
         } catch (erro) {
