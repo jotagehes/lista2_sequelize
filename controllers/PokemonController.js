@@ -1,22 +1,39 @@
-const { Pokemons } = require('../models')
+const {
+    Pokemons
+} = require('../models/')
 
 class PokemonController {
-    async getAll(req, res){
+    async getAll(req, res) {
 
-        try{
-            const pokemons = await Pokemons.findAll()
-            return res.status(200).json(pokemons)
-        }catch(erro){
-            return res.status(400).json({ error: erro.message })
+        try {
+            const todosPokemons = await Pokemons.findAll()
+            return res.status(200).json(todosPokemons)
+        } catch (erro) {
+            return res.status(400).json({
+                error: erro.message
+            })
         }
     }
-    async insert(req, res){
+    async getOne(req, res){
         
-        try{
+        try {
+            const umPokemons = await Pokemons.findOne()
+            return res.status(200).json(umPokemons)
+        } catch (erro) {
+            return res.status(400).json({
+                error: erro.message
+            })
+        }
+    }
+    async insert(req, res) {
+
+        try {
             const novoPokemon = await Pokemons.create(req.body)
             return res.status(200).json(novoPokemon)
-        }catch(erro){
-            return res.status(400).json({ error: erro.message })
+        } catch (erro) {
+            return res.status(400).json({
+                error: erro.message
+            })
         }
     }
 }
